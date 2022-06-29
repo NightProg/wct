@@ -1,4 +1,4 @@
-def get_params():
+def get_ignore_params():
     params = []  # table that will contain the parameters
     ignore_file = open('.ignore', 'r')
 
@@ -11,6 +11,3 @@ def get_params():
     ignore_file.close()
 
     return params
-
-if __name__ == "__main__":
-    print("Dogo Yeb")
