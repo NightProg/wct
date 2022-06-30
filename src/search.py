@@ -1,5 +1,5 @@
 import os
-from . import ignore_analyser as ignore
+from . import ignore_analysis as ignore
 
 
 def searching(argv_params):
