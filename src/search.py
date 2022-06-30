@@ -1,31 +1,30 @@
-import os
-from . import ignore_analysis as ignore
+import os, sys
+from .module import username, ignore_analysis as ignore
 
 
-def searching(argv_params):
-    os.chdir('/home/')
-    
-    # this part of the program allows to register the username of our user
-    # to be able to access his whole file tree 
-    users = {}
+class Search:
+    def __init__(self, argv_list, username):
+        self.argv_list = argv_list
+        self.username = username
 
-    for user in os.listdir():
-        if user == ".directory":
-            continue
-        i = 1
-        users[str(i)] = user
-        i += 1
+    def explorer(self):
+        return "Dogo Yeb !"
 
-    for key, user in users.items():
-        print(f"[{key}] : {user}")
-    
-    user_id = input('Who are you ? ')
+    def search(self):
+        if self.argv_list[2] == "--root":
+            os.chdir('../')
+            return self.explorer()
+        
+        elif self.argv_list[2] == "--session":
+            return self.explorer()
 
-    try:
-        username = users[user_id]
-    except:
-        print(f"\nNo user associated with key {user_id}")
-        quit()
-    
-    return f"Welcome user {users[user_id]} !" 
+        elif self.argv_list[2] == "--anywhere":
+            session = self.explorer()
+
+            os.chdir('../')
+            root = self.explorer()
+
+            return session, root
+        else:
+            print(f"\"{sys.argv[2]}\" is not recognized.")  # "--test" is not recognized.
 
