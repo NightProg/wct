@@ -1,21 +1,22 @@
-import os, sys
-from .module import username, ignore_analysis as ignore
-from .module import explorer
+import os
+from .module.explorer import explorer
 
 
 def search(argv_list, username):
-    if self.argv_list[2] == "--root":
+    """ drops the explorer where the user wants it according to the second screen of the command """
+
+    if argv_list[2] == "--root":
         os.chdir('../')
-        return self.explorer()
+        return explorer(argv_list[3])
     
-    elif self.argv_list[2] == "--session":
-        return self.explorer()
+    elif argv_list[2] == "--session":
+        return explorer(argv_list[3])
 
-    elif self.argv_list[2] == "--anywhere":
-        session = self.explorer()
+    elif argv_list[2] == "--anywhere":
+        session = explorer(argv_list[3])
 
         os.chdir('../')
-        root = self.explorer()
+        root = explorer(argv_list[3])
 
         return session, root
 

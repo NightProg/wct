@@ -4,7 +4,7 @@ def verification(argv_list):
         print('The parameter of the verification() function is not an array as expected.')
         quit()
 
-    if len(argv_list) < 3:
+    if len(argv_list) == 3:
         print('All the parameters did not pass, try again with all the parameters this time.\nRefer to the README for more information about the parameters.')
         quit()
     
