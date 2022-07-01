@@ -1,12 +1,11 @@
 def verification(argv_list):
 
-    if type(argv_list) != 'list':
+    if type(argv_list) != list:
         print('The parameter of the verification() function is not an array as expected.')
         quit()
 
     if len(argv_list) < 3:
-        print('All the parameters did not pass, try again with all the parameters this time.\n
-               Refer to the README for more information about the parameters.')
+        print('All the parameters did not pass, try again with all the parameters this time.\nRefer to the README for more information about the parameters.')
         quit()
     
     params_list = {
@@ -21,7 +20,9 @@ def verification(argv_list):
         if key == argv_list[1]:
             for suffix in suffixes:
                 if suffix == argv_list[2]:
-                    return True
-            print(f"{argv_list[1]} has not attribute \"{argv_list[2:0]}\"")
+                    return
+            print(f"\"{argv_list[1]}\" has not attribute \"{' '.join(argv_list[2:])}\".")
             quit()
 
+        print(f"\"{argv_list[1]}\" is not recognized.")  # "a b c d" is not recognized.
+        quit()

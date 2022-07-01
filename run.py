@@ -1,12 +1,10 @@
 import sys
 import src.search as search
+from src.module.params_verification import verification
 
+
+verification(sys.argv)
 
 if sys.argv[1] == "-s":  # python run.py -s ...
-    username = search.username.get_username()
-
-    research = search.Search(sys.argv, username)
-    research.search()
-
-else:
-    print(f"\"{' '.join(sys.argv[1:])}\" is not recognized.")  # "a b c d" is not recognized.
+    username = search.username.get_username() 
+    search.search(sys.argv, username)
