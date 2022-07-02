@@ -10,3 +10,12 @@ Linux.
 *Smwct* a été imaginé pour rendre plus facile la trouvaille d'un élément dans un répertoire pré-suggéré tels que `/` ou `/home/username/`, nottament pour
 se débarasser de tous les fichiers/dossiers restants après la désinstallation d'un logiciel. Il se veut aussi remplacer `grep` qui est un outil à mon sens
 trop embigü.
+### Mise en place de Smwct sur Linux
+Avant d'effectuer ce qui suit, assurez vous d'avoit correctement installé Python et Git.
+
+Une fois que vous avez Python sur votre distribution Linux, lancez la commande suivante suivante à la "racine" (`/home/username/`) pour éviter les 
+complications lors de l'utilisation de *smwct* :
+```
+git clone https://github.com/b4-b4/smwct.git
+```
+La mise en place du logiciel est terminé.
