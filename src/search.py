@@ -6,16 +6,18 @@ def search(argv_list, username):
     """ drops the explorer where the user wants it according to the second screen of the command """
 
     if argv_list[2] == "--root":
-        os.chdir('../')
+        os.chdir("/")
         return explorer(argv_list[3])
     
     elif argv_list[2] == "--session":
+        os.chdir(f"/home/{username}/")
         return explorer(argv_list[3])
 
     elif argv_list[2] == "--anywhere":
+        os.chdir(f"/home/{username}/")
         session = explorer(argv_list[3])
 
-        os.chdir('../')
+        os.chdir("/")
         root = explorer(argv_list[3])
 
         return session, root

@@ -37,6 +37,4 @@ def explorer(target: str):
                 visited_path.append(item_path)
                 os.chdir(item_path)
 
-            if os.path.isdir(item_path) == False and item_path not in visited_path:
-                visited_path.append(item_path)
             
