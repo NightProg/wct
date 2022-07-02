@@ -1,31 +1,24 @@
 import os
-from . import ignore_analysis as ignore
+from .module.explorer import explorer
 
 
-def searching(argv_params):
-    os.chdir('/home/')
+def search(argv_list, username):
+    """ drops the explorer where the user wants it according to the second screen of the command """
+
+    if argv_list[2] == "--root":
+        os.chdir("/")
+        return explorer(argv_list[3])
     
-    # this part of the program allows to register the username of our user
-    # to be able to access his whole file tree 
-    users = {}
+    elif argv_list[2] == "--session":
+        os.chdir(f"/home/{username}/")
+        return explorer(argv_list[3])
 
-    for user in os.listdir():
-        if user == ".directory":
-            continue
-        i = 1
-        users[str(i)] = user
-        i += 1
+    elif argv_list[2] == "--anywhere":
+        os.chdir(f"/home/{username}/")
+        session = explorer(argv_list[3])
 
-    for key, user in users.items():
-        print(f"[{key}] : {user}")
-    
-    user_id = input('Who are you ? ')
+        os.chdir("/")
+        root = explorer(argv_list[3])
 
-    try:
-        username = users[user_id]
-    except:
-        print(f"\nNo user associated with key {user_id}")
-        quit()
-    
-    return f"Welcome user {users[user_id]} !" 
+        return session, root
 
