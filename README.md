@@ -1,6 +1,6 @@
 # smwct
 ### Presentation
-*Smwct*, for "*Search and Moderation Wizard for the Computer Tree*", or "*Search and Moderation Wizard for the Computer Tree*",
+*Smwct*, for "*Search and Moderation Wizard for the Computer Tree*",
 is, as its name indicates, a program whose mission is to help man in the search and moderation of his computer tree. More
 exactly, *Smwct* allows two things: to search from one of the pre-suggested places a sequence of characters in all the folders, sub-folders and 
 from the initial directory, chosen by the user, **or**, search and delete after confirmation all the folders, subfolders and
