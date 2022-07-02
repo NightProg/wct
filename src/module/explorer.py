@@ -8,40 +8,36 @@ def explorer(target: str):
     current_folder = os.getcwd()
 
     while True:
-        print(os.listdir())
-        print(startin_path)
 
         for item in os.listdir(current_folder):
-            # ending definition
+            print(f"\n[ITEM] : {item}")
+
             if os.path.isdir(''.join((os.getcwd(), "/", item))):
-                print("[is folder]")
+                print(f"[is folder] : {''.join((os.getcwd(), '/', item))}")
                 ending = "/"
-            else:
-                print("[is file]")
+            elif os.path.isfile(''.join((os.getcwd(), "/", item))):
+                print(f"[is file] : {''.join((os.getcwd(), '/', item))}")
                 ending = ""
+            else:
+                print("[Error]")
 
-            item_path = ''.join((os.getcwd(), item, ending))
-            print(item_path)
- 
-            if os.getcwd() == startin_path and item == os.listdir()[-1] and item_path in visited_path:
-                return target_path
+            item_path = ''.join((os.getcwd()+"/", item, ending))
+            print(f"[ITEM PATH] : {item_path}")
 
-            if item == os.listdir()[-1] and item_path in visited_path:
-                print("exit..")
-                os.chdir('../')
-                current_folder = os.getcwd()
 
-            if target in item and item_path not in target_path: 
-                print("found!")
-                print(item)
+            # DEBUG: Target Path
+            print(f"[TARGET PATH] : {len(target_path)} ->")
+            for i in target_path:
+                print(f"    > {i}")
+            
+            # DEBUG: Visited Path
+            print(f"[VISITED PATH] : {len(visited_path)} ->")
+            for i in visited_path:
+                print(f"    > {i}")
+            print("\n")
+
+            # The target is part of the item and has not yet been found
+            if target in item and item_path not in target_path:
                 target_path.append(item_path)
-                print(target_path[-1])
-
-            if os.path.isdir(item_path) and item_path not in visited_path:
-                print("enter..")
-                visited_path.append(item_path)
-                current_folder = item_path
-                continue
-
-            if os.path.isdir(item_path) == False and item_path not in visited_path:
-                visited_path.append(item_path)
+                print(f"[+GREAT] : {item_path}")
+            
