@@ -1,46 +1,46 @@
 # smwct
-### Présentation
-*Smwct*, pour "*Search and Moderation Wizard for the Computer Tree*", ou "*Assistant de recherche et de modération pour l'arborescence d'un ordinateur*",
-est comme son nom l'indique un programme ayant pour mission d'aider l'homme dans la recherche et la modération de l'arborescance de son ordinateur. Plus
-exactement, *Smwct* permet deux choses : rechercher à partir d'un des endroits pré-suggéré une suite de caractère dans tous les dossiers, sous-dossiers et 
-fichier issuent du répertoire initial, choisis par l'utilisateur, **ou**, rechercher et supprimer après confirmation tous les dossiers, sous-dossiers et
-fichier issuent du répertoire initial (toujours choisis par l'utilisateur). C'est un logiciel codé uniquement en Python et uniquement dédié aux utilisateurs
-Linux.
+### Presentation
+*Smwct*, for "*Search and Moderation Wizard for the Computer Tree*", or "*Search and Moderation Wizard for the Computer Tree*",
+is, as its name indicates, a program whose mission is to help man in the search and moderation of his computer tree. More
+exactly, *Smwct* allows two things: to search from one of the pre-suggested places a sequence of characters in all the folders, sub-folders and 
+from the initial directory, chosen by the user, **or**, search and delete after confirmation all the folders, subfolders and
+from the initial directory (always chosen by the user). It is a software coded only in Python and only dedicated to
+Linux users.
 ### Cause
-*Smwct* a été imaginé pour rendre plus facile la trouvaille d'un élément dans un répertoire pré-suggéré tels que `/` ou `/home/username/`, nottament pour
-se débarasser de tous les fichiers/dossiers restants après la désinstallation d'un logiciel. Il se veut aussi remplacer `grep` qui est un outil à mon sens
-trop embigü.
-## Technique
-### Mise en place de Smwct sur Linux
-Avant d'effectuer ce qui suit, assurez vous d'avoit correctement installé Python et Git.
+*Smwct* was designed to make it easier to find an item in a pre-suggested directory such as `/` or `/home/username/`, especially to
+to get rid of all the files/folders left after uninstalling a program. It is also intended to replace `grep` which is a tool that I find
+tool in my opinion.
+## Technical
+### Setting up Smwct on Linux
+Before doing the following, make sure you have Python and Git installed correctly.
 
-Une fois que vous avez Python sur votre distribution Linux, lancez la commande suivante suivante à la "racine" (`/home/username/`) pour éviter les 
-complications lors de l'utilisation de *smwct* :
+Once you have Python on your Linux distribution, run the following command at the "root" (`/home/username/`) to avoid 
+complications when using *smwct*:
 ```
 git clone https://github.com/b4-b4/smwct.git
 ```
-La mise en place du logiciel est terminé.
-### Rechercher
-Théoriquement, si vous avez installé *smwct* à la racine de votre arborescance (`/home/username/`), la procédure devrait être la suivante :
+The installation of the software is finished.
+### Search
+Theoretically, if you have *smwct* installed at the root of your tree (`/home/username/`), the procedure should be as follows:
 ```
 cd
 python smwct/run.py -s --starting your_character_string
 ```
-En entrant `python smwct/run.py` vous demandez à l'interpréteur python d'exécuter le programme `run.py` qui se trouve dans le répertoire `smwct/`. Ensuite, 
-le premier drapeau `-s` signifi que vous avez envie d'effectuer une recherche. Le second drapeau `--starting` **doit** être remplacé par, au choix, les
-dreapeaux suivants :
-- `--root` : informe que vous souhaitez effectuer la recherche à la racine absolue de votre ordinateur, à savoir `/`.
-- `--session` : informe que vous souhaitez effectuer la recherche à la racine de votre "séssion", soit `/home/username/`.
-- `--anywhere` : effectue la recherche à la racine absolue et la racine de votre session (`--root` + `--session`). Cette commande peut nécessiter un temps considérable, vraiment.
+By entering `python smwct/run.py` you tell the python interpreter to run the `run.py` program which is in the `smwct/` directory. Then, 
+the first `-s` flag means that you want to run a search. The second flag `--starting` **must** be replaced by either of the following
+following flags:
+- `--root`: informs that you want to search at the absolute root of your computer, namely `/`.
+- `--session`: informs that you want to search at the root of your "session", i.e. `/home/username/`.
+- `--anywhere`: searches the absolute root and the root of your session (`--root` + `--session`). This command can take a long time, really.
 
-Ensuite, `your_character_string` **doit** être remplacé par l'élément que vous voulez rechercher dans le second drapeau (`--session`, `--root` or `--anywhere`). Attention, `your_character_string` n'est pas l'élément qui est cherché à proprement parler, c'est l'élément recherché dans les différents dossiers, sous-dossiers et fichier du deuxième drapeau. Par exemple, cette ligne de commande
+Then `your_character_string` **must** be replaced by the element you want to search for in the second flag (`--session`, `--root` or `--anywhere`). Note that `your_character_string` is not the actual item being searched for, it is the item being searched for in the various folders, subfolders and files in the second flag. For example, this command line
 ```
 python smwct/run.py -s --root a
 ```
-retournera peut être
+might return
 ```
 /etc/gra.o
 /var/
 /var/test/allocation/
 ```
-car `etc/gra.o` contient un `a` dans `gra.o`, `/var/` car `var` contient `a`, etc.
+because `etc/gra.o` contains an `a` in `gra.o`, `/var/` because `var` contains `a`, etc.
