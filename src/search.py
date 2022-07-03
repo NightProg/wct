@@ -7,18 +7,18 @@ def search(argv_list, username):
 
     if argv_list[2] == "--root":
         os.chdir("/")
-        return explorer(argv_list[3])
+        return explorer(argv_list[3], username)
     
     elif argv_list[2] == "--session":
         os.chdir(f"/home/{username}/")
-        return explorer(argv_list[3])
+        return explorer(argv_list[3], username)
 
     elif argv_list[2] == "--anywhere":
         os.chdir(f"/home/{username}/")
-        session = explorer(argv_list[3])
+        session = explorer(argv_list[3], username)
 
         os.chdir("/")
-        root = explorer(argv_list[3])
+        root = explorer(argv_list[3], username)
 
         return session, root
 
