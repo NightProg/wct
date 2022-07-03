@@ -9,9 +9,10 @@ def explorer(target: str, username):
 
     while True:
 
+        print(f"\n[BEFORE ENTERING, HERE ARE THE CURRENT FOLDER] : {current_folder}")
         for item in os.listdir(current_folder):
             
-            print(f"\n[ITEM] : {item}")
+            print(f"[ITEM] : {item}")
 
             if os.path.isdir(''.join((os.getcwd(), "/", item))):
                 print(f"[is folder] : {''.join((os.getcwd(), '/', item))}")
@@ -22,7 +23,10 @@ def explorer(target: str, username):
             else:
                 print("[Error]")
 
-            item_path = ''.join((os.getcwd()+"/", item, ending))
+            if os.getcwd() == '/':
+                item_path = ''.join((os.getcwd(), item, ending))
+            else:
+                item_path = ''.join((os.getcwd()+"/", item, ending))
 
 
             # DEBUG: item_path + current_folder
@@ -37,7 +41,7 @@ def explorer(target: str, username):
                 # DEBUG: Target Path
                 print(f"[TARGET PATH] : {len(target_path)} ->")
                 for i in target_path:
-                print(f"    > {i}")
+                    print(f"    > {i}")
            
             if item_path not in visited_path:
                 visited_path.append(item_path)
@@ -46,11 +50,12 @@ def explorer(target: str, username):
                 print(f"[VISITED PATH] : {len(visited_path)} ->")
                 for i in visited_path:
                     print(f"    > {i}")
+                print("\n")
 
                 if os.path.isdir(item_path):
                     os.chdir(item_path)
                     current_folder = item_path
-                    print("[ENTRY...]")
+                    print("^ [ENTRY...]\n")
                     continue
 
             if os.listdir(os.getcwd())[-1] == item and item_path in visited_path:
