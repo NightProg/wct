@@ -22,7 +22,10 @@ def explorer(target: str):
                 print("[Error]")
 
             item_path = ''.join((os.getcwd()+"/", item, ending))
+
+            # DEBUG: item_path + current_folder
             print(f"[ITEM PATH] : {item_path}")
+            print(f"[CURRENT PATH] : {current_folder}")
 
 
             # DEBUG: Target Path
@@ -39,5 +42,11 @@ def explorer(target: str):
             # The target is part of the item and has not yet been found
             if target in item and item_path not in target_path:
                 target_path.append(item_path)
-                print(f"[+GREAT] : {item_path}")
             
+            if item_path not in visited_path:
+                visited_path.append(item_path)
+
+                if os.path.isdir(item_path):
+                    current_folder = item_path
+                    os.chdir(current_folder)
+                    continue
