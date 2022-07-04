@@ -18,7 +18,7 @@ class Explorer:
         if pathlib.Path(item).is_dir():
             self.folder_count += 1
 
-        elif pathlib.Path(item).is_dir():
+        elif pathlib.Path(item).is_file():
             self.file_count += 1
 
     def get_statistics(self):
