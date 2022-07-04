@@ -1,5 +1,4 @@
-import os, sys
-
+import pathlib
 
 class Explorer:    
     def __init__(self):
@@ -16,28 +15,26 @@ class Explorer:
         return target_paths_filter
 
     def set_statistics(self, item):
-        if os.path.isdir(item):
+        if pathlib.Path(item).is_dir():
             self.folder_count += 1
 
-        elif os.path.isfile(item):
+        elif pathlib.Path(item).is_dir():
             self.file_count += 1
 
     def get_statistics(self):
         return f"{self.folder_count} folders, {self.file_count} files."
 
     def explorer(self, directory, target):
-        list_paths = sorted([path for path in os.listdir(directory)])
+        list_paths = sorted(pathlib.Path(directory).iterdir(), lambda a: str(a))
 
         for index in range(len(list_paths)):
             if target in list_paths[index]:
                 self.target_paths.append((directory + list_paths[index]))
 
-            absolute = os.path.join(directory, list_paths[index])
+            absolute = pathlib.Path(directory) / list_paths[index]
             self.set_statistics(absolute)
 
-            if index == len(list_paths) - 1:
-                if os.path.isdir(absolute):
-                    self.explorer(absolute, target)
-            else:
-                if os.path.isdir(absolute):
-                    self.explorer(absolute, target)
+            
+            if pathlib.Path(absolute).is_dir():
+                self.explorer(absolute, target)
+            
