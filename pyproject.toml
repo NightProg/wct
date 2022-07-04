@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "smwct"
+version = "0.1.0"
+description = "About Search and Moderation Wizard for the Computer Tree."
+readme = "README.md"
+authors = [{ name = "b4b4" }]
+license = { file = "LICENSE" }
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["search", "wizard", "computer tree"]
+dependencies = []
+requires-python = ">=3.10"
+
+[project.optional-dependencies]
+dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
+
+[project.urls]
+Homepage = "https://github.com/b4-b4/smwct"
+
+[project.scripts]
+wct = "smwct.src.smwct"

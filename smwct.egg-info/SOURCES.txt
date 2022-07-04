@@ -1,0 +1,16 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+smwct.egg-info/PKG-INFO
+smwct.egg-info/SOURCES.txt
+smwct.egg-info/dependency_links.txt
+smwct.egg-info/top_level.txt
+src/__init__.py
+src/search.py
+src/smwct.py
+src/module/__init__.py
+src/module/explorer.py
+src/module/ignore_analysis.py
+src/module/params_verification.py
+src/module/username.py
