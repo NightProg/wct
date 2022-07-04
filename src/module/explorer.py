@@ -4,7 +4,7 @@ import os, time
 def explorer(target: str, username):
     target_path = []
     visited_path = []
-    startin_path = os.getcwd()
+    starting_path = os.getcwd()
     current_folder = os.getcwd()
 
     while True:
