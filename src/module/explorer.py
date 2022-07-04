@@ -1,12 +1,19 @@
 import os, sys
 
 
-class Explorer:
-    
+class Explorer:    
     def __init__(self):
         self.file_count = 0
         self.folder_count = 0
         self.target_paths = []
+
+    def get_target_paths(self):
+        target_paths_filter = []
+
+        for i in self.target_paths:
+            if i not in target_paths_filter:
+                target_paths_filter.append(i)
+        return target_paths_filter
 
     def set_statistics(self, item):
         if os.path.isdir(item):
@@ -18,7 +25,7 @@ class Explorer:
     def get_statistics(self):
         return f"{self.folder_count} folders, {self.file_count} files."
 
-    def explorer(self, directory, target, prefix=""):
+    def explorer(self, directory, target):
         list_paths = sorted([path for path in os.listdir(directory)])
 
         for index in range(len(list_paths)):
@@ -29,16 +36,8 @@ class Explorer:
             self.set_statistics(absolute)
 
             if index == len(list_paths) - 1:
-                print(prefix + "└── " + list_paths[index])
                 if os.path.isdir(absolute):
-                    self.explorer(absolute, "yarn", prefix + "    ")
+                    self.explorer(absolute, target)
             else:
-                print(prefix + "├── " + list_paths[index])
                 if os.path.isdir(absolute):
-                    self.explorer(absolute, "yarn", prefix + "│   ")
-
-research = Explorer()
-result = research.explorer("/home/b4b4/", "yarn")
-print(result)
-print(research.target_paths)
-print(research.get_statistics())
+                    self.explorer(absolute, target)
