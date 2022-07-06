@@ -1,4 +1,4 @@
-# smwct
+# wct
 ### Presentation
 *Smwct*, for "*Search and Moderation Wizard for the Computer Tree*",
 is, as its name indicates, a program whose mission is to help man in the search and moderation of his computer tree. More
