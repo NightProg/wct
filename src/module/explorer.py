@@ -47,8 +47,12 @@ class Explorer:
             if pattern in list_paths[index]:
                 self.target_paths.append((self.get_tuple_content(directory) + "/" + list_paths[index]).replace('\\', '/'))
 
-            absolute = pathlib.Path(directory) / list_paths[index]
-            self.set_statistics(absolute)
+            full_path = pathlib.Path(directory) / list_paths[index]
+            self.set_statistics(full_path)
             
-            if pathlib.Path(absolute).is_dir():
-                self.explorer(absolute, pattern)
+            try:
+                if pathlib.Path(full_path).is_dir():
+                    self.explorer(full_path, pattern)
+            except PermissionError as error:
+                print(f"Sorry. You are not allowed to enter in '{full_path}'.")
+                continue

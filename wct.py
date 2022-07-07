@@ -3,8 +3,11 @@ Usage:
     wct (s | d) (~ | / | <path>) <regex>
 
 Commands:
-    s    Allows you to perform a search
-    d    Allows to find and delete the corresponding elements (after confirmation)
+    s              Allows you to perform a search
+    d              Allows to find and delete the corresponding elements (after confirmation)
+
+Options:
+    -f, --faster   Allows wct to go faster
 
 """
 import sys
