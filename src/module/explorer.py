@@ -5,6 +5,7 @@ class Explorer:
     def __init__(self):
         self.file_count = 0
         self.folder_count = 0
+
         self.target_paths = []
 
     def get_target_paths(self):
@@ -44,12 +45,12 @@ class Explorer:
         list_paths = sorted([path for path in os.listdir(directory)])
 
         for index in range(len(list_paths)):
-            if pattern in list_paths[index]:
-                self.target_paths.append((self.get_tuple_content(directory) + "/" + list_paths[index]).replace('\\', '/'))
-
             full_path = pathlib.Path(directory) / list_paths[index]
-            self.set_statistics(full_path)
-            
+
+            if pattern in list_paths[index]:
+                self.target_paths.append((self.get_tuple_content(directory) + list_paths[index]).replace('\\', '/'))
+                self.set_statistics(full_path)
+
             try:
                 if pathlib.Path(full_path).is_dir():
                     self.explorer(full_path, pattern)
@@ -58,3 +59,4 @@ class Explorer:
                 continue
             except OSError as error:
                 print(error)
+                continue

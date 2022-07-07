@@ -3,11 +3,11 @@ Usage:
     wct (s | d) (~ | / | <path>) <regex>
 
 Commands:
-    s              Allows you to perform a search
-    d              Allows to find and delete the corresponding elements (after confirmation)
+    s   Allows you to perform a search
+    d   Allows to find and delete the corresponding elements (after confirmation)
 
 Options:
-    -f, --faster   Allows wct to go faster
+    -f, --faster    Allows wct to go faster
 
 """
 import sys, time
@@ -38,7 +38,7 @@ if __name__ == "__main__":
             print(f"~ {item}")
         
         # displays the execution time
-        print(f"\n[   {time.time() - start_time} seconds.   ")
+        print(f"\n[   {time.time() - start_time} seconds.   ]")
     
     elif args['d']:
         sys.exit("The 'd' command is currently unusable.")
