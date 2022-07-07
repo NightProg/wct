@@ -56,3 +56,5 @@ class Explorer:
             except PermissionError as error:
                 print(f"Sorry. You are not allowed to enter in '{full_path}'.")
                 continue
+            except OSError as error:
+                print(error)
