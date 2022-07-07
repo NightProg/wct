@@ -16,21 +16,20 @@ Commands:
 
 if __name__ == "__main__":
     args = docopt(doc, version="0.0.1")
-    print(args)
     
     if args['s']:
         if args['~']: path = "~"
         elif args['/']: path = "/"
         elif args['<path>']: path = args['<path>']
+
         pattern = args['<regex>']
-
-        # DEBUG
-        # print(path)
-        # print(pattern)
-
         explorer = Explorer()
         explorer.explorer(path, pattern)
-        print(f"\n\n{explorer.get_target_paths()}")
+
+        print(f"{explorer.get_statistics()}\n")
+        
+        for item in explorer.get_target_paths():
+            print(f"~ {item}")
     
     elif args['d']:
         sys.exit("The 'd' command is currently unusable.")

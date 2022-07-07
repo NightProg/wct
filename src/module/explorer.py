@@ -37,9 +37,6 @@ class Explorer:
 
         for index in range(len(list_paths)):
             if pattern in list_paths[index]:
-                # DEBUG
-                print(f"    DIRECTORY : {directory}")
-
                 self.target_paths.append((self.get_tuple_content(directory) + "/" + list_paths[index]).replace('\\', '/'))
 
             absolute = pathlib.Path(directory) / list_paths[index]
