@@ -1,13 +1,36 @@
 import sys
-import src.search as search
 
-from src.module.params_verification import verification
-from src.module.username import get_username
+from docopt import docopt
+from src.module.explorer import Explorer
 
 
-verification(sys.argv)
+doc = """
+Usage:
+    wct (s | d) (~ | / | <path>) <regex>
 
-if sys.argv[1] == "-s":  # python run.py -s ...
-    username = get_username() 
-    result = search.search(sys.argv, username)
-    print(result)
+Commands:
+    s    Allows you to perform a search
+    d    Allows to find and delete the corresponding elements (after confirmation)
+
+"""
+
+if __name__ == "__main__":
+    args = docopt(doc, version="0.0.1")
+    print(args)
+    
+    if args['s']:
+        if args['~']: path = "~"
+        elif args['/']: path = "/"
+        elif args['<path>']: path = args['<path>']
+        pattern = args['<regex>']
+
+        # DEBUG
+        # print(path)
+        # print(pattern)
+
+        explorer = Explorer()
+        explorer.explorer(path, pattern)
+        print(f"\n\n{explorer.get_target_paths()}")
+    
+    elif args['d']:
+        sys.exit("The 'd' command is currently unusable.")
