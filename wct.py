@@ -10,7 +10,7 @@ Options:
     -f, --faster   Allows wct to go faster
 
 """
-import sys
+import sys, time
 
 from docopt import docopt
 from src.module.explorer import Explorer
@@ -26,12 +26,19 @@ if __name__ == "__main__":
 
         pattern = args['<regex>']
         explorer = Explorer()
+
+        # starts counting
+        start_time = time.time()
         explorer.explorer(path, pattern)
 
-        print(f"{explorer.get_statistics()}\n")
+        # excavation statistics
+        print(f"\n{explorer.get_statistics()}")
         
         for item in explorer.get_target_paths():
             print(f"~ {item}")
+        
+        # displays the execution time
+        print(f"\n[   {time.time() - start_time} seconds.   ")
     
     elif args['d']:
         sys.exit("The 'd' command is currently unusable.")
