@@ -1,10 +1,4 @@
-import sys
-
-from docopt import docopt
-from src.module.explorer import Explorer
-
-
-doc = """
+"""
 Usage:
     wct (s | d) (~ | / | <path>) <regex>
 
@@ -13,9 +7,14 @@ Commands:
     d    Allows to find and delete the corresponding elements (after confirmation)
 
 """
+import sys
+
+from docopt import docopt
+from src.module.explorer import Explorer
+
 
 if __name__ == "__main__":
-    args = docopt(doc, version="0.0.1")
+    args = docopt(__doc__, version="0.0.1")
     
     if args['s']:
         if args['~']: path = "~"
