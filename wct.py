@@ -1,13 +1,12 @@
 """
 Usage:
-    wct (s | d) (~ | / | <path>) <regex>
+    wct s <path> <regex>
 
 Commands:
     s   Allows you to perform a search
-    d   Allows to find and delete the corresponding elements (after confirmation)
 
 Options:
-    -f, --faster    Allows wct to go faster
+    -p=<children>, --parent=<number>    Limits the search depth in number of children
 
 """
 import sys, time
@@ -18,12 +17,10 @@ from src.module.explorer import Explorer
 
 if __name__ == "__main__":
     args = docopt(__doc__, version="0.0.1")
+    print(args)
     
     if args['s']:
-        if args['~']: path = "~"
-        elif args['/']: path = "/"
-        elif args['<path>']: path = args['<path>']
-
+        path = args['<path>']
         pattern = args['<regex>']
         explorer = Explorer()
 
@@ -40,5 +37,3 @@ if __name__ == "__main__":
         # displays the execution time
         print(f"\n[   {time.time() - start_time} seconds.   ]")
     
-    elif args['d']:
-        sys.exit("The 'd' command is currently unusable.")
