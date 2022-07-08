@@ -1,31 +1,31 @@
-"""
-Usage:
-    wct s <path> <regex>
+import time, argparse
 
-Commands:
-    s   Allows you to perform a search
-
-Options:
-    -p=<children>, --parent=<number>    Limits the search depth in number of children
-
-"""
-import sys, time
-
-from docopt import docopt
 from src.module.explorer import Explorer
 
 
 if __name__ == "__main__":
-    args = docopt(__doc__, version="0.0.1")
-    print(args)
-    
-    if args['s']:
-        path = args['<path>']
-        pattern = args['<regex>']
+
+    # COMMAND MODEL: wct <path> <pattern> [-c CHILD | --child CHILD]
+
+    parser = argparse.ArgumentParser(prog="wct", description="Search and Moderation Wizard for the Computer Tree")
+    parser.add_argument("path", type=str, help="Corresponds to the path where the search should start")
+    parser.add_argument("pattern", type=str, help="Corresponds to the required motif")
+
+    options_group = parser.add_mutually_exclusive_group()
+    options_group.add_argument("-c","--child", help="Limits the search depth in number of children")
+
+    subparsers = parser.add_subparsers(help='sub-command help')
+
+    args = parser.parse_args()
+
+    if args.path:
+        path = args.path
+        pattern = args.pattern
         explorer = Explorer()
 
-        # starts counting
+        # starts count
         start_time = time.time()
+
         explorer.explorer(path, pattern)
 
         # excavation statistics
@@ -36,4 +36,3 @@ if __name__ == "__main__":
         
         # displays the execution time
         print(f"\n[   {time.time() - start_time} seconds.   ]")
-    
