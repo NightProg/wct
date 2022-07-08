@@ -1,5 +1,7 @@
 import pathlib, os
 
+from src.colors import bcolors
+
 
 class Explorer:    
     def __init__(self):
@@ -55,8 +57,8 @@ class Explorer:
                 if pathlib.Path(full_path).is_dir():
                     self.explorer(full_path, pattern)
             except PermissionError as error:
-                print(f"Sorry. You are not allowed to enter in '{full_path}'.")
+                print(f"{bcolors.YELLOW}Sorry. You are not allowed to enter in '{full_path}'.{bcolors.RESET}")
                 continue
             except OSError as error:
-                print(error)
+                print(bcolors.RED + error + bcolors.RESET)
                 continue
