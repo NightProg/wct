@@ -33,12 +33,10 @@ if __name__ == "__main__":
         print(f"\n{explorer.get_statistics()}")
         
         for item in explorer.get_target_paths():
-            print(item)
             sliced_item = item.split("/")
-            print(sliced_item)
             last_elem = bcolors.GREEN + sliced_item[-1] + bcolors.RESET
-            print(last_elem)
-            complete_item = '/'.join((sliced_item[:-1], last_elem))
+            sliced_item[-1] = last_elem
+            complete_item = '/'.join(sliced_item)
 
             print(f"~ {complete_item}")
         
