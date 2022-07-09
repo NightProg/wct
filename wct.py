@@ -1,4 +1,4 @@
-import time, argparse
+import time, argparse, os
 
 from src.module.explorer import Explorer
 from src.colors import bcolors
@@ -18,7 +18,6 @@ if __name__ == "__main__":
     options_group.add_argument("-d","--delete", action="store_true", help="Allows deletion at the end of the search (after confirmation)")
 
     args = parser.parse_args()
-    print(args)
 
     if args:
         path = args.path
@@ -39,26 +38,49 @@ if __name__ == "__main__":
 
             if args.delete:
                 target_paths = explorer.get_target_paths()
-                print(f"{target_paths.index(item)} ~ {complete_item}")
+                print(f"{target_paths.index(item)} | {complete_item}")
             else:
-                print(f"~ {complete_item}")
+                print(f"| {complete_item}")
         
         # displays the execution time
         print(f"\n[   {time.time() - start_time} seconds   ]")
 
         if args.delete:
-            saved = input(f"""{bcolors.RED}
-Using the index, write the individual items you do not
-want to delete separated by commas.
+            saved = input(f"""{bcolors.YELLOW}
+Using the index, write the individual items you do not want to delete separated by commas.
 Otherwise, enter <DE> to delete everything or <Enter> to exit.
-{bcolors.RESET}""")
+>  {bcolors.RESET}""")
 
             if saved == "":
                 quit()
 
-            elif saved == "DE":
-                print("DE")
-
             else:
-                print(f"{bcolors.RED}/!\ Your entry is not correct /!\{bcolors.RESET}")
-                # Here
+                try:
+                    saved_list = [saved]
+                    saved_list = saved_list[0]
+                    sliced_saved_list = saved_list.split(",")
+
+                    for i in sliced_saved_list:
+                        if i == "":
+                            sliced_saved_list.remove(i)
+
+                    for i in target_paths:
+                        if saved != "DE":
+                            if str(target_paths.index(i)) in sliced_saved_list:
+                                pass
+
+                        try:
+                            if os.path.isdir(i):
+                                os.rmdir(i)
+                                print(f"'{i}' has been removed (is dir)")
+
+                            elif os.path.isfile(i):
+                                os.remove(i)
+                                print(f"'{i}' has been removed (id file)")
+
+                        except Exception as ex:
+                            print(f"{bcolors.YELLOW}{ex}{bcolors.RESET}")
+
+                except Exception as ex:
+                    quit(f"{bcolors.RED}{ex}{bcolors.RESET}")
+                

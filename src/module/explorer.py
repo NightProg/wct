@@ -45,21 +45,22 @@ class Explorer:
         """ performs the search where it was dropped off. Uses other functions to operate and is therefore not independent """
         
         list_paths = sorted([path for path in os.listdir(directory)])
-        wrong_directory = ["__pycache__", "build", "venv", ".env", "dist", "doc", "llvm"]
+        wrong_directory = ["__pycache__", "build", "venv", ".env", "dist", "doc", "llvm", ".git", ".github", "docs"]
 
         for index in range(len(list_paths)):
             full_path = pathlib.Path(directory) / list_paths[index]
 
             if pattern in list_paths[index] and list_paths[index] not in wrong_directory:
-                self.target_paths.append((self.get_tuple_content(directory) + list_paths[index]).replace('\\', '/'))
+                self.target_paths.append((self.get_tuple_content(directory) + "/" + list_paths[index]).replace('\\', '/'))
                 self.set_statistics(full_path)
 
             try:
-                if pathlib.Path(full_path).is_dir() and full_path not in wrong_directory:
+                if pathlib.Path(full_path).is_dir() and list_paths[index] not in wrong_directory:
                     self.explorer(full_path, pattern)
             except PermissionError as error:
                 print(f"{bcolors.YELLOW}Sorry. You are not allowed to enter in '{full_path}'.{bcolors.RESET}")
                 continue
+
             except OSError as error:
                 print(bcolors.RED + error + bcolors.RESET)
                 continue
