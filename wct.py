@@ -6,7 +6,7 @@ from src.colors import bcolors
 
 if __name__ == "__main__":
 
-    # COMMAND MODEL: wct <path> <pattern> [-c CHILD | --child CHILD]
+    # COMMAND MODEL: wct <path> <pattern> [-d | --delete]
 
     # Parser
     parser = argparse.ArgumentParser(prog="wct", description="Search and Moderation Wizard for the Computer Tree")
@@ -15,7 +15,7 @@ if __name__ == "__main__":
 
     # Options group
     options_group = parser.add_mutually_exclusive_group()
-    options_group.add_argument("-c","--child", type=int, default=None, help="Limits the search depth in number of children")
+    options_group.add_argument("-d","--delete", action="store_true", help="Allows deletion at the end of the search (after confirmation)")
 
     args = parser.parse_args()
     print(args)
@@ -23,7 +23,6 @@ if __name__ == "__main__":
     if args:
         path = args.path
         pattern = args.pattern
-        child = args.child
         explorer = Explorer()
 
         # starts count
@@ -38,7 +37,28 @@ if __name__ == "__main__":
             sliced_item[-1] = last_elem
             complete_item = '/'.join(sliced_item)
 
-            print(f"~ {complete_item}")
+            if args.delete:
+                target_paths = explorer.get_target_paths()
+                print(f"{target_paths.index(item)} ~ {complete_item}")
+            else:
+                print(f"~ {complete_item}")
         
         # displays the execution time
         print(f"\n[   {time.time() - start_time} seconds   ]")
+
+        if args.delete:
+            saved = input(f"""{bcolors.RED}
+Using the index, write the individual items you do not
+want to delete separated by commas.
+Otherwise, enter <DE> to delete everything or <Enter> to exit.
+{bcolors.RESET}""")
+
+            if saved == "":
+                quit()
+
+            elif saved == "DE":
+                print("DE")
+
+            else:
+                print(f"{bcolors.RED}/!\ Your entry is not correct /!\{bcolors.RESET}")
+                # Here
