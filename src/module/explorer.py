@@ -62,5 +62,5 @@ class Explorer:
                 continue
 
             except OSError as error:
-                print(bcolors.RED + error + bcolors.RESET)
+                print(bcolors.RED + error.strerror + bcolors.RESET)
                 continue
