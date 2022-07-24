@@ -46,6 +46,11 @@ if __name__ == "__main__":
         # displays the execution time
         print(f"\n[   {time.time() - start_time} seconds   ]")
 
+        try:
+            target_paths
+        except:
+            quit(bcolors.print_red("Nothing to delete."))
+
         if args.delete:
             saved = input(f"""{bcolors.YELLOW}
 Using the index, write the individual items you do not want to delete separated by commas.
@@ -66,22 +71,22 @@ Otherwise, enter <DE> to delete everything or <Enter> to exit.
                             sliced_saved_list.remove(i)
 
                     for i in target_paths:
-                        if saved != "DE":
-                            if str(target_paths.index(i)) in sliced_saved_list:
-                                pass
 
-                        try:
-                            if os.path.isdir(i):
-                                os.rmdir(i)
-                                print(f"'{i}' has been removed (is dir)")
+                        if str(target_paths.index(i)) not in sliced_saved_list:
+                            try:
+                                if os.path.isdir(i):
+                                    os.rmdir(i)
+                                    print(f"'{i}' has been removed (dir)")
 
-                            elif os.path.isfile(i):
-                                os.remove(i)
-                                print(f"'{i}' has been removed (id file)")
+                                elif os.path.isfile(i):
+                                    os.remove(i)
+                                    print(f"'{i}' has been removed (file)")
 
-                        except Exception as ex:
-                            print(f"{bcolors.YELLOW}{ex}{bcolors.RESET}")
+                            except Exception as ex:
+                                print(bcolors.print_yellow(ex))
+
+                            except OSError as ose:
+                                print(bcolors.print_yellow(ose))
 
                 except Exception as ex:
-                    quit(f"{bcolors.RED}{ex}{bcolors.RESET}")
-                
+                    quit(bcolors.print_red(ex))

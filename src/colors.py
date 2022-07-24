@@ -7,16 +7,16 @@ class bcolors:
 
     @staticmethod
     def print_red(text):
-        print(bcolors.RED + text + bcolors.RESET)
+        print(bcolors.RED + str(text) + bcolors.RESET)
     
     @staticmethod
     def print_yellow(text):
-        print(bcolors.YELLOW + text + bcolors.RESET)
+        print(bcolors.YELLOW + str(text) + bcolors.RESET)
     
     @staticmethod
     def print_green(text):
-        print(bcolors.GREEN + text + bcolors.RESET)
+        print(bcolors.GREEN + str(text) + bcolors.RESET)
     
     @staticmethod
     def print_blue(text):
-        print(bcolors.BLUE + text + bcolors.RESET)
+        print(bcolors.BLUE + str(text) + bcolors.RESET)
