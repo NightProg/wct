@@ -11,11 +11,12 @@ if __name__ == "__main__":
     # Parser
     parser = argparse.ArgumentParser(prog="wct", description="Search and Moderation Wizard for the Computer Tree")
     parser.add_argument("path", type=str, help="Corresponds to the path where the search should start")
-    parser.add_argument("pattern", type=str, help="Corresponds to the required motif")
+    parser.add_argument("pattern", type=str, help="the pattern to search for")
 
     # Options group
     options_group = parser.add_mutually_exclusive_group()
-    options_group.add_argument("-d","--delete", action="store_true", help="Allows deletion at the end of the search (after confirmation)")
+    options_group.add_argument("-d","--delete", action="store_true", help="Allows deletion at the end of the search"
+                                                                          "(after confirmation)")
 
     args = parser.parse_args()
 

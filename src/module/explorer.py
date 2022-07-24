@@ -1,7 +1,8 @@
-import pathlib, os
-
+import pathlib
+import os
+import re
 from src.colors import bcolors
-
+from typing import Pattern
 
 class Explorer:    
     def __init__(self):
@@ -41,7 +42,7 @@ class Explorer:
 
         return array_for_conv[0]
 
-    def explorer(self, directory: str, pattern: str):
+    def explorer(self, directory: str, pattern: Pattern[str]):
         """ performs the search where it was dropped off. Uses other functions to operate and is therefore not independent """
         
         list_paths = sorted([path for path in os.listdir(directory)])
@@ -50,17 +51,17 @@ class Explorer:
         for index in range(len(list_paths)):
             full_path = pathlib.Path(directory) / list_paths[index]
 
-            if pattern in list_paths[index] and list_paths[index] not in wrong_directory:
+            if re.match(pattern, list_paths[index]) and list_paths[index] not in wrong_directory:
                 self.target_paths.append((self.get_tuple_content(directory) + "/" + list_paths[index]).replace('\\', '/'))
                 self.set_statistics(full_path)
 
             try:
                 if pathlib.Path(full_path).is_dir() and list_paths[index] not in wrong_directory:
-                    self.explorer(full_path, pattern)
-            except PermissionError as error:
-                print(f"{bcolors.YELLOW}Sorry. You are not allowed to enter in '{full_path}'.{bcolors.RESET}")
+                    self.explorer(str(full_path), pattern)
+            except PermissionError:
+                bcolors.print_yellow(f"Sorry. You are not allowed to enter in '{full_path}'.")
                 continue
 
             except OSError as error:
-                print(bcolors.RED + error.strerror + bcolors.RESET)
+                bcolors.print_red(error.strerror)
                 continue
