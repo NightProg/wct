@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import time, argparse, os
 
 from src.module.explorer import Explorer
@@ -6,7 +8,7 @@ from src.colors import bcolors
 
 if __name__ == "__main__":
 
-    # COMMAND MODEL: wct <path> <pattern> [-d | --delete]
+    # COMMAND MODEL: python /path/to/wct.py <path> (<pattern> | <regex>) [-d | --delete]
 
     # Parser
     parser = argparse.ArgumentParser(prog="wct", description="Search and Moderation Wizard for the Computer Tree")
